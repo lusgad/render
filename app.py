@@ -40,7 +40,7 @@ def get_min_max_year():
 
 # Initialize app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-server = app.server  # ← CRITICAL FOR DEPLOYMENT
+server = app.server  # CRITICAL FOR DEPLOYMENT
 
 # Get initial data for setup
 min_year, max_year = get_min_max_year()
@@ -605,11 +605,11 @@ def update_dashboard(n_clicks, year_range, boroughs, vehicles, factors, injuries
     # Build WHERE clause for database query
     where_clause, params = build_where_clause(year_range, boroughs, vehicles, factors, injuries, person_type, search_parsed)
     
-    # Query only the data we need
+    # Query only the data we need - FIXED SQL COMMENT
     sql = f"""
     SELECT * FROM crashes 
     WHERE {where_clause}
-    LIMIT 10000  # Limit for performance
+    LIMIT 10000  -- Limit for performance
     """
     
     dff = query_db(sql, params)
